@@ -25,7 +25,7 @@ class SqliteItemExporter(BaseItemExporter):
     	for field_name in item.iterkeys():
     		field_list.append('[%s]' % field_name)
     		field = item.fields[field_name]
-    		value_list.append(self.serialize_field(field, field_name, item[field_name]))
+    		value_list.append(self.serialize_field(field, field_name, str(item[field_name])))
     	
     	sql = 'insert into [%s] (%s) values (%s)' % (item_class_name, ', '.join(field_list), ', '.join(['?' for f in field_list]))
     	self.conn.execute(sql, value_list)
